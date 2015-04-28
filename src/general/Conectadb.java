@@ -9,7 +9,8 @@ import java.sql.Statement;
 public class Conectadb{
  
  
-//variables miembro
+//variables miembro Modificado el 29 de abril
+	
  
     private String usuario;
     private String clave;
