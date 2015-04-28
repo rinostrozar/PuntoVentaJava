@@ -54,7 +54,8 @@ public class sucursal {
 	}
 	
 	public Object listar(){
-		object
+		Object[] lista = new Object[4];
+		return lista;
 	}
 	
 	public void eliminar(){

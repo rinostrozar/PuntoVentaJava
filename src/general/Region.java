@@ -49,7 +49,8 @@ public class Region {
 	}
 	
 	public Object listar(){
-		object
+		Object[] lista = new Object[4];
+		return lista;
 	}
 	
 	
