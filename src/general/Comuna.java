@@ -2,6 +2,7 @@ package general;
 
 import java.awt.List;
 import java.sql.SQLException;
+
 import javax.swing.table.DefaultTableModel;
 
 import com.mysql.jdbc.ResultSet;
@@ -55,10 +56,30 @@ public class Comuna {
 		
 	}
 	
-	//public void ListarComuna(){
-		//:P
+	public boolean ListarComuna(){//por ahora, solo boolean, no resultset u otra cosa rara :v
+	String consulta ="select codigo, nombre, codigoRegion from Comuna";
+	ResultSet rs = null;
+	String nombre = "";
+	int codigo;
+	int codigoRegion;
+
+	try {
+		cn.conectar();
+		rs = (ResultSet) cn.consulta(consulta);
+		while (rs.next()){
+			codigo = rs.getInt(1);
+			nombre = rs.getString(2);
+			codigoRegion = rs.getInt(3);
+		}
+		
+		return true;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return false;
+	}
 	
-//	}
+	}
 	
 	public String ConsultarRegion(int codigo){
 		String consulta ="select reg.nombre from Comuna com join Region reg on com.codigoRegion=reg.codigo where com.codigoRegion=" + codigo + ";" ;
