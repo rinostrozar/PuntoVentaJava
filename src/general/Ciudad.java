@@ -20,22 +20,24 @@ public class Ciudad {
 		this.codigoComuna = codigoComuna;
 	}
 	
-	public void IngresarCiudad(){
-		String consulta = "insert into Ciudad values (" + codigo + ", '"+ nombre + "', '" + codigoComuna + "');";
+	public boolean IngresarCiudad(String nombre, String codigoComuna){
+		String consulta = "insert into Ciudad (nombre, codigoComuna) values ('"+ nombre + "', '" + codigoComuna + "');";
 		try {
 			cn.conectar();
-			cn.insertar(consulta);//falta corroborar el ingreso de datos + mensaje		
+			cn.insertar(consulta);//falta corroborar el ingreso de datos + mensaje	
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} 
 		
 	}
 	
-	public ResultSet ConsultarCiudad(int codigo){
+	public String ConsultarCiudad(int codigo){
 		String consulta ="select nombre from Ciudad where codigo=" + codigo + ";" ;
 		ResultSet rs = null;
-		String nombre;
+		String nombre = "";
 
 		try {
 			cn.conectar();
@@ -47,20 +49,33 @@ public class Ciudad {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return rs;
+		return nombre;
 		
 	}
 	
-	public Object[] ListarCiudad(){
-		 Object[] lista = new Object[3]; //como obtener cantidad de filas y asignarlo al objeto
-		 String consulta = "select * from ciudad";		 
-		 return lista;		
-	}
+	//public boolean ListarCiudad(){
+		// 
+		 //		 
+		 //		
+	//}
 	
-	public String ConsultaComuna(){
-		String consulta ="";
+	public String ConsultarComuna(int codigo){
+		String consulta ="select com.nombre from Ciudad ciu join Comuna com on ciu.codigoComuna=com.codigo where ciu.codigoComuna=" + codigo + ";" ;
+		ResultSet rs = null;
+		String nombre = "";
+
+		try {
+			cn.conectar();
+			rs = (ResultSet) cn.consulta(consulta);
+			while (rs.next()){
+				nombre = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nombre;
 		
-		return consulta;
 	}
 
 
