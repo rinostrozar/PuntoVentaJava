@@ -55,8 +55,8 @@ public class Comuna {
 		
 	}
 	
-	//public void ListarCiudad(){
-		
+	//public void ListarComuna(){
+		//:P
 	
 //	}
 	
