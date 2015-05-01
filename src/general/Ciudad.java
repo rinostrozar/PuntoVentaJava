@@ -53,11 +53,30 @@ public class Ciudad {
 		
 	}
 	
-	//public boolean ListarCiudad(){
-		// 
-		 //		 
-		 //		
-	//}
+	public boolean ListarCiudad(){//por ahora, solo boolean, no resultset u otra cosa rara :v
+		String consulta ="select codigo, nombre, codigoComuna from Ciudad";
+		ResultSet rs = null;
+		String nombre = "";
+		int codigo;
+		int codigoComuna;
+
+		try {
+			cn.conectar();
+			rs = (ResultSet) cn.consulta(consulta);
+			while (rs.next()){
+				codigo = rs.getInt(1);
+				nombre = rs.getString(2);
+				codigoComuna = rs.getInt(3);
+			}
+			
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		}
 	
 	public String ConsultarComuna(int codigo){
 		String consulta ="select com.nombre from Ciudad ciu join Comuna com on ciu.codigoComuna=com.codigo where ciu.codigoComuna=" + codigo + ";" ;
