@@ -1,11 +1,7 @@
 package general;
 
-import java.awt.List;
 import java.sql.SQLException;
-
-import javax.swing.table.DefaultTableModel;
-
-import com.mysql.jdbc.ResultSet;
+import java.sql.ResultSet;
 
 public class Comuna {
 	private int codigo;
@@ -27,32 +23,30 @@ public class Comuna {
 		String consulta = "insert into Comuna (nombre, codigoRegion) values ('"+ nombre + "', '" + codigoRegion + "');";
 		try {
 			cn.conectar();
-			cn.insertar(consulta);//falta corroborar el ingreso de datos + mensaje	
+			cn.insertar(consulta);
 			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return false;
 		} 
 		
 	}
 	
-	public String ConsultarComuna(int codigo){
+	public ResultSet ConsultarComuna(int codigo){
 		String consulta ="select nombre from Comuna where codigo=" + codigo + ";" ;
 		ResultSet rs = null;
 		String nombre = "";
 
 		try {
 			cn.conectar();
-			rs = (ResultSet) cn.consulta(consulta);
+			rs = cn.consulta(consulta);
 			while (rs.next()){
 				nombre = rs.getString(1);
 			}
+			return rs;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return rs;
 		}
-		return nombre;
+
 		
 	}
 	
@@ -65,42 +59,36 @@ public class Comuna {
 
 		try {
 			cn.conectar();
-			rs = (ResultSet) cn.consulta(consulta);
+			rs = cn.consulta(consulta);
 			while (rs.next()){
 				codigo = rs.getInt(1);
 				nombre = rs.getString(2);
 				codigoRegion = rs.getInt(3);
-				//System.out.println(codigo);
-				//System.out.println(nombre);
-				//System.out.println(codigoRegion);
 			}
-			
 			return rs;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return rs=null;
+			return rs;
 		}
 		
 		
 		}
 	
-	public String ConsultarRegion(int codigo){
+	public ResultSet ConsultarRegion(int codigo){
 		String consulta ="select reg.nombre from Comuna com join Region reg on com.codigoRegion=reg.codigo where com.codigoRegion=" + codigo + ";" ;
 		ResultSet rs = null;
 		String nombre = "";
 
 		try {
 			cn.conectar();
-			rs = (ResultSet) cn.consulta(consulta);
+			rs = cn.consulta(consulta);
 			while (rs.next()){
 				nombre = rs.getString(1);
 			}
+			return rs;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return rs;
 		}
-		return nombre;
+
 		
 	}
 
