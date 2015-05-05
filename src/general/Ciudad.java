@@ -53,7 +53,7 @@ public class Ciudad {
 		
 	}
 	
-	public boolean ListarCiudad(){//por ahora, solo boolean, no resultset u otra cosa rara :v
+	public ResultSet ListarCiudad(){
 		String consulta ="select codigo, nombre, codigoComuna from Ciudad";
 		ResultSet rs = null;
 		String nombre = "";
@@ -67,13 +67,16 @@ public class Ciudad {
 				codigo = rs.getInt(1);
 				nombre = rs.getString(2);
 				codigoComuna = rs.getInt(3);
+				//System.out.println(codigo);
+				//System.out.println(nombre);
+				//System.out.println(codigoComuna);
 			}
 			
-			return true;
+			return rs;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
+			return rs=null;
 		}
 		
 		}
