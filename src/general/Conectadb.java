@@ -34,7 +34,7 @@ public class Conectadb{
     public Conectadb() {
         //poner los datos apropiados
         this.usuario = "root";
-        this.clave = "1q2w3";
+        this.clave = "";
         this.url = "jdbc:mysql://localhost/sist_ventas";
         this.driverClassName = "org.gjt.mm.mysql.Driver";
     }
