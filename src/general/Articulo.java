@@ -1,5 +1,6 @@
 package general;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -14,6 +15,8 @@ public class Articulo {
 	   private int valor;
 	    
 	   private int proveedor;
+	   
+	   Conectadb cn = new Conectadb();
 	   
 	   public Articulo(){}
 	   
@@ -54,41 +57,59 @@ public class Articulo {
 			proveedor = prov;
 		}
 		
-	   public boolean ingresar(int cod,String nom, int val,int canti,int codca) {
+	   public boolean ingresarArticulo(String nom, int val,int canti,int codca) {
 		   
 		   try{
-		   Conectadb cn = new Conectadb();
+		   
 		   cn.conectar();
-		   String consultaSql="insert into articulo values("+cod+",'"+nom+"',"+val+","+canti+","+codca+")";
+		   String consultaSql="insert into articulo (nombre, valor, cantidad, codCategoria) values('"+nom+"',"+val+","+canti+","+codca+")";
 		   cn.insertar(consultaSql);
 		   return true;
 		   }
 		   catch(Exception ex){
 			return false;
 		   }
-		 
-		 
+
 	   }
 	   
 	   
-	   public java.lang.Object listar() {
-	      
-	      return null;
-	   }
+	   public ResultSet listarArticulo(){
+			String consulta ="select * from Articulo";
+			ResultSet rs = null;
+			String nombre = "";
+			int codigo, codigoCategoria, valor, cantidad;
+
+			try {
+				cn.conectar();
+				rs = cn.consulta(consulta);
+				while (rs.next()){
+					codigo = rs.getInt(1);
+					nombre = rs.getString(2);
+					valor = rs.getInt(3);
+					cantidad = rs.getInt(4);
+					codigoCategoria = rs.getInt(5);
+				}
+				return rs;
+			} catch (SQLException e) {
+				return rs;
+			}
+			
+			}
 	   
 	   
-	   public boolean consultarArticulo(int cod) {
-	      
-		   try{
-			   Conectadb cn = new Conectadb();
-			   cn.conectar();
-			   String consultaSql="Select nombre from articulo where codigo ="+cod ;
-			   cn.consulta(consultaSql);
-			   return true;
-		   }
-		   catch(Exception es){
-			   return false;
-		   }
-	     
-	   }
-	}
+	   public ResultSet consultarArticulo(int codigo){
+			String consulta ="select nombre, cantidad from Articulo where codigo=" + codigo + ";" ;
+			ResultSet rs = null;
+
+			try {
+				cn.conectar();
+				rs =  cn.consulta(consulta);
+				return rs;
+				
+			} catch (SQLException e) {
+				return rs;
+			}
+			 
+			
+		}
+}
