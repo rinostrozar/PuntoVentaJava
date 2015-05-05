@@ -10,7 +10,8 @@ public class Region {
 
 	private int codigo;
 	private String nombre;
-	private int numero;
+	private String numero;
+	Conectadb cn = new Conectadb();
 	
 	public Region(){
 	}
@@ -31,27 +32,85 @@ public class Region {
 		nombre=nom;
 	}
 	
-	public int getnumero(){
+	public String getnumero(){
 		return numero;
 	}
 	
-	public void setnumero(int num){
+	public void setnumero(String num){
 		numero=num;
 	}
 	
 		
-	public void ingreso(){	
-	}
+		public boolean insertarregion(int codigo,String nombre, int numero){
+			String ingreso= "inster into Region values ("+codigo+",'"+ nombre + "', "+ numero +")"; 
+			try{
+				cn.conectar();
+				cn.insertar(ingreso);	
+				System.out.println(ingreso);
+				return true;
+				} 
+				catch (Exception e) {
+				return false;
+				}			
+		
+		}
 	
-	public String consulta(){
-		String consultaregion="";
-		return consultaregion;
-	}
 	
-	public Object listar(){
-		Object[] lista = new Object[4];
-		return lista;
-	}
+		public boolean ConsultarRegion(int codigo){
+			String consulta="select nombre from region where codigo="+ codigo + "";
+			try {
+				cn.conectar();
+				cn.consulta(consulta);
+				return true;
+				}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+				}	
+		}
+		
+		
+		 public boolean BorrarRegion(int codigo){
+			 String eliminar="delete from Region where codigo="+ codigo +"";
+			 try {
+				cn.conectar();
+				cn.consulta(eliminar);
+				return true;
+				}
+			 catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				return false;
+				}	
+		}
 	
 	
+		 public boolean ListarRegion(){//por ahora, solo boolean, no resultset u otra cosa rara 
+				String consulta ="select codigo, nombre, numero from Region";
+				ResultSet rs = null;
+				String nombre = "";
+				int codigo;
+				String numero;
+
+				try {
+					cn.conectar();
+					rs = (ResultSet) cn.consulta(consulta);
+					while (rs.next()){
+						codigo = rs.getInt(1);
+						nombre = rs.getString(2);
+						numero = rs.getString(3);
+						System.out.println(codigo);
+						System.out.println(nombre);
+						System.out.println(numero);
+					}
+					
+					return true;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return false;
+				}
+				
+				}
 }
