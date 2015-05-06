@@ -1,3 +1,5 @@
+package general;
+
 import static org.junit.Assert.*;
 
 import java.sql.ResultSet;

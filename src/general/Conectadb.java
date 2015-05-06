@@ -109,10 +109,10 @@ public class Conectadb{
         this.estancia = (Statement) conn.createStatement();
         estancia.executeUpdate(actualiza);
     }
- 
-    public ResultSet borrar(String borra) throws SQLException {
-        Statement st = (Statement) this.conn.createStatement();
-        return (ResultSet) st.executeQuery(borra);
+    
+    public int borrar(String borra) throws SQLException {
+    	Statement st = (Statement) this.conn.createStatement();
+        return st.executeUpdate(borra);
     }
  
     public int insertar(String inserta) throws SQLException {
