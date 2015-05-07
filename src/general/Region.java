@@ -42,14 +42,16 @@ public class Region {
 	
 		
 		public boolean insertarregion(int codigo,String nombre, int numero){
-			String ingreso= "inster into Region values ("+codigo+",'"+ nombre + "', "+ numero +")"; 
+			String ingreso= "insert into Region values ("+codigo+",'"+ nombre + "', "+ numero +")"; 
 			try{
 				cn.conectar();
 				cn.insertar(ingreso);	
 				System.out.println(ingreso);
 				return true;
 				} 
-				catch (Exception e) {
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				return false;
 				}			
 		
@@ -75,7 +77,7 @@ public class Region {
 			 String eliminar="delete from Region where codigo="+ codigo +"";
 			 try {
 				cn.conectar();
-				cn.consulta(eliminar);
+				cn.borrar(eliminar);
 				return true;
 				}
 			 catch (SQLException e) {

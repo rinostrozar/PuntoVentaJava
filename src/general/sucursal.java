@@ -83,7 +83,7 @@ public class sucursal {
 		 	try {
 		 		String eliminar="delete from sucursal where codigo="+ codigosucursal +"";
 		 		cn.conectar();
-				cn.consulta(eliminar);
+				cn.borrar(eliminar);
 				return true;
 				}
 			catch (SQLException e) {
