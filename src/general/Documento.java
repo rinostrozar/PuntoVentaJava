@@ -109,7 +109,7 @@ public class Documento {
    
    
    //METODO PARA LISTAR LAS BOLETAS
-   public boolean ListarBoleta(){
+   public ResultSet ListarBoleta(){
 		String consulta ="select * from boleta";
 		ResultSet rs = null;
 		int codigo;
@@ -124,17 +124,16 @@ public class Documento {
 				total = rs.getInt(3);
 				System.out.println(">> Código boleta: [" + codigo + "]\n>> Fecha: [" + fecha + "]\n>> Total boleta: [$" + total + "]\n");
 			}
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
+		return rs;
 		
 	}
    
    
    //METODO PARA LISTAR LAS FACTURAS
-   public boolean ListarFactura(){
+   public ResultSet ListarFactura(){
 		String consulta ="select f.codigo, f.rutcliente, f.fecha, es.nombre from factura f join estadodocumento es on f.codEstado=es.codigo";
 		ResultSet rs = null;
 		int codigo;
@@ -151,16 +150,15 @@ public class Documento {
 				estado = rs.getString(4);
 				System.out.println(">> Código factura: [" + codigo + "]\n>> Rut del cliente: [" + rutcliente + "]\n>> Fecha: [" + fecha + "]\n>> Estado del documento: [" + estado + "]\n");
 			}
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}	
+		return rs;
 	}
    
    
    //METODO PARA LISTAR LOS DETALLES DE LAS BOLETAS
-   public boolean ListarDetalleBoleta(){
+   public ResultSet ListarDetalleBoleta(){
 		String consulta ="select db.codigo, a.codigo, a.nombre, db.codboleta from detalleboleta db join articulo a on db.codarticulo=a.codigo";
 		ResultSet rs = null;
 		int codigo;
@@ -177,16 +175,15 @@ public class Documento {
 				codigoboleta = rs.getInt(4);
 				System.out.println(">> Código del Detalle de Boleta: [" + codigo + "]\n>> Código de Artículo: [" + codigoarticulo + "]\n>> Nombre de Artículo: [" + nombre + "]\n>> Código de Boleta: [" + codigoboleta + "]\n");
 			}
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
+		return rs;
 	}
    
    
    //METODO PARA LISTAR LOS DETALLES DE LAS FACTURAS
-   public boolean ListarDetalleFactura(){
+   public ResultSet ListarDetalleFactura(){
 		String consulta ="select df.codigo, a.codigo, a.nombre, df.codfactura from detallefactura df join articulo a on df.codarticulo=a.codigo";
 		ResultSet rs = null;
 		int codigo;
@@ -203,16 +200,15 @@ public class Documento {
 				codigofactura = rs.getInt(4);
 				System.out.println(">> Código del Detalle de Factura: [" + codigo + "]\n>> Código de Artículo: [" + codigoarticulo + "]\n>> Nombre de Artículo: [" + nombre + "]\n>> Código de Factura: [" + codigofactura + "]\n");
 			}
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
+		return rs;
 	}
 		
    
    //METODO PARA LISTAR LOS ESTADOS DE LOS DOCUMENTOS
-   public boolean ListarEstadoDocumento(){
+   public ResultSet ListarEstadoDocumento(){
 		String consulta ="select * from estadodocumento";
 		ResultSet rs = null;
 		int codigo;
@@ -227,16 +223,15 @@ public class Documento {
 				descripcion = rs.getString(3);
 				System.out.println(">> Código del Estado de Documento: [" + codigo + "]\n>> Nombre del estado: [" + nombre + "]\n>> Descripción del estado: [" + descripcion + "]\n");
 			}
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
+		return rs;
 	}
    
    
    //METODO PARA CONSULTAR UNA BOLETA
-   public int ConsultarBoleta(int codigo){
+   public ResultSet ConsultarBoleta(int codigo){
 		String consulta ="select codigo, fecha, total from boleta where codigo=" + codigo + ";" ;
 		ResultSet rs = null;
 		String fecha = " ";
@@ -253,12 +248,12 @@ public class Documento {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return codigo + total;
+		return rs;
 	}
    
    
    //METODO PARA CONSULTAR UNA FACTURA
-   public String ConsultarFactura(int codigo){
+   public ResultSet ConsultarFactura(int codigo){
 		String consulta ="select f.codigo, f.rutcliente, f.fecha, es.nombre from factura f join estadodocumento es on es.codigo=f.codestado where f.codigo=" + codigo + ";" ;
 		ResultSet rs = null;
 		String rutcliente = " ";
@@ -277,12 +272,12 @@ public class Documento {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return estado + codigo + rutcliente;
+		return rs;
 	}
    
    
    //METODO PARA CONSULTAR UN DETALLE DE BOLETA
-   public String ConsultarDetalleBoleta(int codigo){
+   public ResultSet ConsultarDetalleBoleta(int codigo){
 		String consulta ="select db.codigo, a.codigo, a.nombre, db.codboleta from detalleboleta db join articulo a on db.codarticulo=a.codigo where db.codigo=" + codigo + ";" ;
 		ResultSet rs = null;
 		int codigoarticulo = 0;
@@ -301,12 +296,12 @@ public class Documento {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return codigo + codigoarticulo + nombrearticulo + codigoboleta;
+		return rs;
 	}
    
    
    //METODO PARA CONSULTAR UN DETALLE DE FACTURA
-   public String ConsultarDetalleFactura(int codigo){
+   public ResultSet ConsultarDetalleFactura(int codigo){
 		String consulta ="select df.codigo, a.codigo, a.nombre, df.codfactura from detallefactura df join articulo a on df.codarticulo=a.codigo where df.codigo=" + codigo + ";" ;
 		ResultSet rs = null;
 		int codigoarticulo = 0;
@@ -325,12 +320,12 @@ public class Documento {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return codigo + codigoarticulo + nombrearticulo + codigofactura;
+		return rs;
 	}
    
    
    //METODO PARA CONSULTAR UN ESTADO DE DOCUMENTO
-   public String ConsultarEstadoDocumento(int codigo){
+   public ResultSet ConsultarEstadoDocumento(int codigo){
 		String consulta ="select * from estadodocumento where codigo=" + codigo + ";" ;
 		ResultSet rs = null;
 		String nombre = " ";
@@ -347,7 +342,7 @@ public class Documento {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return codigo + nombre + descripcion;
+		return rs;
 	}
    
    
