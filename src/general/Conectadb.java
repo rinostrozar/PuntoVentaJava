@@ -111,7 +111,7 @@ public class Conectadb{
     }
     
     public int borrar(String borra) throws SQLException {
-    	Statement st = (Statement) conn.createStatement();
+    	Statement st = (Statement) this.conn.createStatement();
         return st.executeUpdate(borra);
     }
  
