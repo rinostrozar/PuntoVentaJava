@@ -10,6 +10,8 @@ import org.junit.Test;
 
 public class DocumentoTest {
 	
+	//CONVERTIMOS EL FORMATO OBTENIDO DE LA LIBRERIA IMPORTADA
+	//Y LE ASIGNAMOS UN NUEVO FORMATO PARA EL INGRESO DE FECHAS
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 	Calendar cal = Calendar.getInstance();  
 	
@@ -18,20 +20,24 @@ public class DocumentoTest {
 	
 		Documento d = new Documento();
 		
-		/*boolean resp = d.IngresarBoleta(2, "2015-3-22" , 1000);
-		assertTrue(resp);*/
+		/*LLAMADA A LOS METODOS CREADOS PARA INSERTAR DATOS*/
 		
-		/*boolean resp = d.IngresarFactura(2, 2, "2015-2-23", 1);
-		assertTrue(resp);*/
 		
-		/*boolean resp = d.IngresarDetalleBoleta(2, 1, 1);
-		assertTrue(resp);*/
+		//assertNotNull(d.IngresarBoleta(2, "2015-3-22" , 1000));
 		
-		/*boolean resp = d.IngresarDetalleFactura(2, 1, 1);
-		assertTrue(resp);*/
+		//assertNotNull(d.IngresarFactura(1, 2, "2015-2-23", 1));
 		
-		/*boolean resp = d.IngresarEstadoDocumento(2, "deuda", "1");
-		assertTrue(resp);*/
+		//assertNotNull(d.IngresarDetalleBoleta(2, 1, 1));
+		
+		//assertNotNull(d.IngresarDetalleFactura(2, 1, 1));
+	
+		//assertNotNull(d.IngresarEstadoDocumento(2, "deuda", "1"));
+		
+		
+		
+		
+		/*LLAMADA A LOS METODOS CREADOS PARA LISTAR DATOS DE LA TABLAS*/
+		
 		
 		//assertNotNull(d.ListarBoleta());
 		
@@ -43,6 +49,12 @@ public class DocumentoTest {
 		
 		//assertNotNull(d.ListarEstadoDocumento());
 		
+		
+		
+		
+		/*LLAMADA A LOS METODOS CREADOS PARA CONSULTAR DATOS DE ACUERDO A UN PARAMETRO INGRESADO EN ESPECIFICO*/ 
+		
+		
 		//assertNotNull(d.ConsultarBoleta(1));
 		
 		//assertNotNull(d.ConsultarFactura(1));
@@ -53,20 +65,22 @@ public class DocumentoTest {
 		
 		//assertNotNull(d.ConsultarEstadoDocumento(1));
 		
-		/*boolean resp = d.BorrarBoleta(2);
-		assertTrue(resp);*/
 		
-		/*boolean resp = d.BorrarFactura(2);
-		assertTrue(resp);*/
 		
-		/*boolean resp = d.BorrarDetalleBoleta(2);
-		assertTrue(resp);*/
 		
-		/*boolean resp = d.BorrarDetalleFactura(2);
-		assertTrue(resp);*/
+		/*LLAMADA A LOS METODOS CREADOS PARA BORRAR DATOS DE LA TABLAS DE ACUERDO A UN PARAMETRO INGRESADO EN ESPECIFICO*/
 		
-		/*boolean resp = d.BorrarEstadoDocumento(2);
-		assertTrue(resp);*/
+		
+		//assertNotNull(d.BorrarBoleta(2));
+		
+		//assertNotNull(d.BorrarFactura(2));
+
+		//assertNotNull(d.BorrarDetalleBoleta(2));
+		
+		//assertNotNull(d.BorrarDetalleFactura(2));
+	
+		//assertNotNull(d.BorrarEstadoDocumento(2));
+		
 	}
 
 }
